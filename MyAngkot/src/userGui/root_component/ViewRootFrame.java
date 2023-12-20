@@ -8,7 +8,9 @@ import graph_utils.Angkot_rute_graph;
 import userGui.component.ViewRuteTerpendek;
 import userGui.component.lihatRute;
 
+import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  *
@@ -16,18 +18,58 @@ import java.awt.*;
  */
 public class ViewRootFrame extends javax.swing.JFrame {
 
-    /** 
+    /**
      * Creates new form ViewRootFrame
      */
     CardLayout cardLayout1, cardLayout2;
-    Angkot_rute_graph angkotRuteGraph;
+    Angkot_rute_graph graph = new Angkot_rute_graph(20);
 
     public ViewRootFrame() {
         initComponents();
         cardLayout1 = (CardLayout) j_main_root_panel.getLayout();
         this.setResizable(false);
         this.setTitle("My Angkot");
-        
+        initializeGraph();
+
+    }
+
+    private void initializeGraph() {
+        // Add graph edges here, similar to the main method in the console version
+        graph.addEdge("Patuk", "Ngawen", 2);
+        graph.addEdge("Patuk", "Wonosari", 6);
+        graph.addEdge("Ngawen", "Wonosari", 4);
+        graph.addEdge("Ngawen", "Karangmojo", 2);
+        graph.addEdge("Ngawen", "Semin", 7);
+        graph.addEdge("Wonosari", "Semin", 8);
+        graph.addEdge("Wonosari", "Sambirejo", 4);
+        graph.addEdge("Wonosari", "UGM Kampus Geologi", 10);
+        graph.addEdge("Karangmojo", "Cawas", 7);
+        graph.addEdge("Karangmojo", "Semin", 1);
+        graph.addEdge("Sambirejo", "Semin", 4);
+        graph.addEdge("Sambirejo", "Bayat", 7);
+        graph.addEdge("Sambirejo", "Gereja Kelor", 6);
+        graph.addEdge("Sambirejo", "Masjid Ngawen", 3);
+        graph.addEdge("Semin", "Cawas", 3);
+        graph.addEdge("Semin", "Bayat", 2);
+        graph.addEdge("Cawas", "Bayat", 2);
+        graph.addEdge("Cawas", "Nologaten", 5);
+        graph.addEdge("Cawas", "RS Panti Rahayu", 6);
+        graph.addEdge("Bayat", "RS Panti Rahayu", 3);
+        graph.addEdge("Bayat", "Gereja Kelor", 3);
+        graph.addEdge("Gereja Kelor", "RS Panti Rahayu", 1);
+        graph.addEdge("Gereja Kelor", "Vihara Candirejo", 1);
+        graph.addEdge("Gereja Kelor", "Masjid Ngawen", 2);
+        graph.addEdge("Masjid Ngawen", "Vihara Candirejo", 4);
+        graph.addEdge("Masjid Ngawen", "UGM Kampus Geologi", 3);
+        graph.addEdge("RS Panti Rahayu", "Vihara Candirejo", 3);
+        graph.addEdge("RS Panti Rahayu", "Nologaten", 2);
+        graph.addEdge("RS Panti Rahayu", "Candirejo", 3);
+        graph.addEdge("Nologaten", "Candirejo", 5);
+        graph.addEdge("Candirejo", "Pasar Sambeng", 6);
+        graph.addEdge("Candirejo", "Vihara Candirejo", 3);
+        graph.addEdge("UGM Kampus Geologi", "Pasar Sambeng", 3);
+        graph.addEdge("Vihara Candirejo", "Pasar Sambeng", 4);
+        System.out.println("Graph berhasil dibuat !! ");
     }
 
     /**
@@ -57,19 +99,21 @@ public class ViewRootFrame extends javax.swing.JFrame {
         p_judul_rute_terpendek = new javax.swing.JPanel();
         l_rute_terpendek = new javax.swing.JLabel();
         p_pencari_rute_pendek_ = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        l_terminal_awal = new javax.swing.JLabel();
+        l_terminal_tujuan = new javax.swing.JLabel();
+        t_terminal_awal = new javax.swing.JTextField();
+        t_terminal_tujuan = new javax.swing.JTextField();
+        l_rute_terpendek_info = new javax.swing.JLabel();
+        t_rute_terpendek = new javax.swing.JTextField();
+        b_mulai_rute = new javax.swing.JButton();
+        b_reset_input = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         j_panel_controller.setBackground(new java.awt.Color(51, 153, 255));
         j_panel_controller.setForeground(new java.awt.Color(255, 102, 102));
 
+        j_label_menu.setBackground(new java.awt.Color(255, 255, 255));
         j_label_menu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         j_label_menu.setForeground(new java.awt.Color(0, 0, 0));
         j_label_menu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -139,9 +183,9 @@ public class ViewRootFrame extends javax.swing.JFrame {
         p_judul_dashboardLayout.setHorizontalGroup(
             p_judul_dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_judul_dashboardLayout.createSequentialGroup()
-                .addContainerGap(185, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183))
+                .addGap(191, 191, 191))
         );
         p_judul_dashboardLayout.setVerticalGroup(
             p_judul_dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,12 +197,10 @@ public class ViewRootFrame extends javax.swing.JFrame {
         j_dashboard_panelLayout.setHorizontalGroup(
             j_dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(j_dashboard_panelLayout.createSequentialGroup()
-                .addComponent(p_judul_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(j_dashboard_panelLayout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(l_gambar_angkot, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addComponent(p_judul_dashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         j_dashboard_panelLayout.setVerticalGroup(
             j_dashboard_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +238,6 @@ public class ViewRootFrame extends javax.swing.JFrame {
         );
 
         l_gambar_peta_angkot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/peta_rute.jpeg"))); // NOI18N
-        l_gambar_peta_angkot.setPreferredSize(new java.awt.Dimension(723, 434));
 
         javax.swing.GroupLayout j_lihat_rute_panelLayout = new javax.swing.GroupLayout(j_lihat_rute_panel);
         j_lihat_rute_panel.setLayout(j_lihat_rute_panelLayout);
@@ -231,7 +272,7 @@ public class ViewRootFrame extends javax.swing.JFrame {
         p_judul_rute_terpendekLayout.setHorizontalGroup(
             p_judul_rute_terpendekLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_judul_rute_terpendekLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(285, Short.MAX_VALUE)
                 .addComponent(l_rute_terpendek, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(185, 185, 185))
         );
@@ -243,65 +284,84 @@ public class ViewRootFrame extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Terminal sekarang");
+        l_terminal_awal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        l_terminal_awal.setText("Terminal sekarang");
 
-        jLabel3.setText("jLabel3");
+        l_terminal_tujuan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        l_terminal_tujuan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l_terminal_tujuan.setText("Terminal Tujuan");
 
-        jButton1.setText("jButton1");
+        t_terminal_awal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jTextField1.setText("jTextField1");
+        t_terminal_tujuan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jTextField2.setText("jTextField2");
+        l_rute_terpendek_info.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        l_rute_terpendek_info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        l_rute_terpendek_info.setText("Rute Terpendek");
 
-        jLabel5.setText("jLabel5");
+        t_rute_terpendek.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        jTextField3.setText("jTextField3");
+        b_mulai_rute.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        b_mulai_rute.setText("Mulai Rute");
+        b_mulai_rute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_mulai_ruteActionPerformed(evt);
+            }
+        });
+
+        b_reset_input.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        b_reset_input.setText("Reset");
+        b_reset_input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_reset_inputActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_pencari_rute_pendek_Layout = new javax.swing.GroupLayout(p_pencari_rute_pendek_);
         p_pencari_rute_pendek_.setLayout(p_pencari_rute_pendek_Layout);
         p_pencari_rute_pendek_Layout.setHorizontalGroup(
             p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
-                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(b_mulai_rute, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(b_reset_input, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(l_rute_terpendek_info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(l_terminal_tujuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(l_terminal_awal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_pencari_rute_pendek_Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
-                        .addGap(205, 205, 205)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                            .addComponent(t_rute_terpendek, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(t_terminal_tujuan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                .addComponent(t_terminal_awal, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         p_pencari_rute_pendek_Layout.setVerticalGroup(
             p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_pencari_rute_pendek_Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(70, 70, 70)
+                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l_terminal_awal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t_terminal_awal, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(t_terminal_tujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_terminal_tujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                    .addComponent(l_rute_terpendek_info, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t_rute_terpendek, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(p_pencari_rute_pendek_Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_mulai_rute, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b_reset_input, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout j_rute_terpendek_panelLayout = new javax.swing.GroupLayout(j_rute_terpendek_panel);
@@ -312,9 +372,9 @@ public class ViewRootFrame extends javax.swing.JFrame {
                 .addComponent(p_judul_rute_terpendek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, j_rute_terpendek_panelLayout.createSequentialGroup()
-                .addGap(0, 52, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(p_pencari_rute_pendek_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(78, 78, 78))
         );
         j_rute_terpendek_panelLayout.setVerticalGroup(
             j_rute_terpendek_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +382,7 @@ public class ViewRootFrame extends javax.swing.JFrame {
                 .addComponent(p_judul_rute_terpendek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(p_pencari_rute_pendek_, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         j_main_root_panel.add(j_rute_terpendek_panel, "card3");
@@ -359,12 +419,11 @@ public class ViewRootFrame extends javax.swing.JFrame {
     private void b_lihat_ruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_lihat_ruteActionPerformed
         // TODO add your handling code here:
         cardLayout1.show(j_main_root_panel, "card2");
-        
+
     }//GEN-LAST:event_b_lihat_ruteActionPerformed
 
     private void b_rute_terpendekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_rute_terpendekActionPerformed
         // TODO add your handling code here:
-
         cardLayout1.show(j_main_root_panel, "card3");
 
     }//GEN-LAST:event_b_rute_terpendekActionPerformed
@@ -373,6 +432,30 @@ public class ViewRootFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardLayout1.show(j_main_root_panel, "card1");
     }//GEN-LAST:event_j_label_menuMouseClicked
+
+    private void b_mulai_ruteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_mulai_ruteActionPerformed
+        // TODO add your handling code here:
+        try {
+            String awal = t_terminal_awal.getText();
+            String akhir = t_terminal_tujuan.getText();
+            List<String> shortestPath = graph.findShortestPath(awal, akhir);
+
+            if (shortestPath != null) {
+                t_rute_terpendek.setText(String.join(" -> ", shortestPath));
+            }
+
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(null, "Vertex Invalid");
+        }
+
+    }//GEN-LAST:event_b_mulai_ruteActionPerformed
+
+    private void b_reset_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_reset_inputActionPerformed
+        // TODO add your handling code here:
+        t_terminal_awal.setText("");
+        t_terminal_tujuan.setText("");
+        t_rute_terpendek.setText("");
+    }//GEN-LAST:event_b_reset_inputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,13 +473,8 @@ public class ViewRootFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewRootFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewRootFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewRootFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException
+                | InstantiationException ex) {
             java.util.logging.Logger.getLogger(ViewRootFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -411,16 +489,11 @@ public class ViewRootFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_lihat_rute;
+    private javax.swing.JButton b_mulai_rute;
+    private javax.swing.JButton b_reset_input;
     private javax.swing.JButton b_rute_terpendek;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel j_dashboard_panel;
     private javax.swing.JLabel j_label_menu;
     private javax.swing.JPanel j_lihat_rute_panel;
@@ -431,9 +504,15 @@ public class ViewRootFrame extends javax.swing.JFrame {
     private javax.swing.JLabel l_gambar_angkot;
     private javax.swing.JLabel l_gambar_peta_angkot;
     private javax.swing.JLabel l_rute_terpendek;
+    private javax.swing.JLabel l_rute_terpendek_info;
+    private javax.swing.JLabel l_terminal_awal;
+    private javax.swing.JLabel l_terminal_tujuan;
     private javax.swing.JPanel p_judul_dashboard;
     private javax.swing.JPanel p_judul_rute_terpendek;
     private javax.swing.JPanel p_lihat_judul_rute;
     private javax.swing.JPanel p_pencari_rute_pendek_;
+    private javax.swing.JTextField t_rute_terpendek;
+    private javax.swing.JTextField t_terminal_awal;
+    private javax.swing.JTextField t_terminal_tujuan;
     // End of variables declaration//GEN-END:variables
 }
