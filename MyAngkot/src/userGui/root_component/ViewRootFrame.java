@@ -5,8 +5,7 @@
 package userGui.root_component;
 
 import graph_utils.Angkot_rute_graph;
-import userGui.component.ViewRuteTerpendek;
-import userGui.component.lihatRute;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class ViewRootFrame extends javax.swing.JFrame {
     /**
      * Creates new form ViewRootFrame
      */
-    CardLayout cardLayout1, cardLayout2;
+    CardLayout cardLayout1;
     Angkot_rute_graph graph = new Angkot_rute_graph(20);
 
     public ViewRootFrame() {
